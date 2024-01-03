@@ -16,13 +16,18 @@ class ProductsTest extends TestCase
         $response = $this->get('/products');
 
         $response->assertSee('No Products available');
+    }
 
-        $response->assertStatus(200);
+    public function test_products_page_returns_correct_title(): void
+    {
+        $response = $this->get('/products');
+
+        $response->assertSee('Products List');
     }
 
     public function test_products_page_dont_returns_empty_products(): void
     {
-        Product::create([
+        $product = Product::create([
             'name' => 'Product 1',
             'description' => 'Product 1 description',
             'price' => 12000
@@ -32,6 +37,8 @@ class ProductsTest extends TestCase
 
         $response->assertDontSee('No Products available');
 
-        $response->assertStatus(200);
+        $response->assertViewHas('products', function($collection) use ($product) {
+            return $collection->contains($product);
+        });
     }
 }
