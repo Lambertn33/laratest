@@ -14,10 +14,17 @@ class ProductsTest extends TestCase
 
     private User $user;
 
+    private User $admin;
+
     protected function setUp(): void
     {
         parent::setUp();
+
         $this->user = User::factory()->create();
+
+        $this->admin = User::factory()->create([
+            'is_admin' => true
+        ]);
     }
 
     public function test_products_page_returns_empty_products(): void
@@ -40,7 +47,7 @@ class ProductsTest extends TestCase
 
         $response = $this->actingAs($this->user)->get('/products');
 
-        $response->assertViewHas('products', function($collection) use ($lastProduct) {
+        $response->assertViewHas('products', function ($collection) use ($lastProduct) {
             return !$collection->contains($lastProduct);
         });
     }
