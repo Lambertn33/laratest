@@ -19,7 +19,9 @@
                             clip-rule="evenodd"></path>
                     </svg>
                 </div>
-                <h3 class="mb-2 text-xl font-bold dark:text-white">{{$product->title}}</h3>
+                <h3 class="mb-2 text-xl font-bold dark:text-white">{{$product->name}}</h3>
+                <h3 class="mb-2 text-xl font-bold dark:text-white">{{$product->price_gbp}}GBP</h3>
+                <h3 class="mb-2 text-xl font-bold dark:text-white">{{$product->price}}USD</h3>
                 <p class="text-gray-500 dark:text-gray-400">{{$product->description}}</p>
             </div>
             @empty
