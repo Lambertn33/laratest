@@ -30,6 +30,7 @@ Route::middleware('auth')->group(function () {
 
     Route::prefix('products')->controller(ProductController::class)->group(function () {
         Route::get('/', 'index')->name('products.index');
+        Route::post('/', 'store')->name('products.store');
         Route::middleware('is_admin')->group(function () {
             Route::get('/create', 'create')->name('products.create');
         });

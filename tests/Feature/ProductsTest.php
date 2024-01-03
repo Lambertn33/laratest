@@ -60,4 +60,32 @@ class ProductsTest extends TestCase
 
         $response->assertDontSee('No Products available');
     }
+
+    public function test_admin_can_see_product_create_button(): void
+    {
+        $response = $this->actingAs($this->admin)->get('/products');
+
+        $response->assertSee('Create New Product');
+    }
+
+    public function test_product_create_page_renders_successfully_to_admin(): void
+    {
+        $response = $this->actingAs($this->admin)->get('/products/create');
+
+        $response->assertStatus(200);
+    }
+
+    public function test_users_cannot_see_product_create_button(): void
+    {
+        $response = $this->actingAs($this->user)->get('/products');
+
+        $response->assertDontSee('Create New Product');
+    }
+
+    public function test_product_create_page_shouldnt_render_to_user(): void
+    {
+        $response = $this->actingAs($this->user)->get('/products/create');
+
+        $response->assertStatus(403);
+    }
 }
