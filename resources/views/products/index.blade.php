@@ -1,8 +1,3 @@
-{{-- @extends('layouts')
-
-@section('content')
-@endsection --}}
-
 <x-app-layout>
     <x-slot name="header">
         <h2 class="font-semibold text-xl text-gray-800 leading-tight">
@@ -17,8 +12,12 @@
                     <section class="">
                         <div class="py-8 px-4 mx-auto max-w-screen-xl sm:py-16 lg:px-6">
                             <div class="max-w-screen-md mb-8 lg:mb-16">
-                                <h2 class="mb-4 text-4xl tracking-tight font-extrabold text-gray-900">Products List</h2>
-                                <p class="text-gray-500 sm:text-xl">List of products</p>
+                                <div class="flex gap-4 items-center">
+                                    <h4 class="mb-4 text-4xl tracking-tight font-extrabold text-gray-900">Products List</h4>
+                                    @if (auth()->user()->is_admin)
+                                    <a href="{{route('products.create')}}" class="bg-black text-white flex justify-center items-center px-4 py-2 rounded-md">Create New Product</a>
+                                    @endif
+                                </div>
                             </div>
                             <div class="space-y-8 md:grid md:grid-cols-2 lg:grid-cols-3 md:gap-12 md:space-y-0">
                                 @forelse ($products as $product)
