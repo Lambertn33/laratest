@@ -101,4 +101,26 @@ class ProductsTest extends TestCase
 
         $this->assertDatabaseHas('products', $newProduct);
     }
+
+    public function test_products_edit_page(): void
+    {
+        $newProduct = Product::factory()->create();
+
+        $response = $this->actingAs($this->admin)->get("/products/$newProduct->id/edit");
+
+        $response->assertStatus(200);
+    }
+
+    public function test_products_edit_page_validation(): void
+    {
+        $newProduct = Product::factory()->create();
+
+        $response = $this->actingAs($this->admin)->put("/products/$newProduct->id/edit", [
+            'name' => '',
+            'price' => 1234000,
+            'description' => 'new description'
+        ]);
+
+        $response->assertInvalid(['name']);
+    }
 }

@@ -34,7 +34,10 @@ Route::middleware('auth')->group(function () {
         Route::middleware('is_admin')->group(function () {
             Route::get('/create', 'create')->name('products.create');
             Route::prefix('{product}')->group(function() {
-                Route::get('/', 'edit')->name('products.edit');
+                Route::prefix('edit')->group(function() {
+                    Route::get('/', 'edit')->name('products.edit');
+                    Route::put('/', 'update')->name('products.update');
+                });
             });
         });
     });

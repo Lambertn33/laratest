@@ -18,7 +18,8 @@
                                         class="text-xl font-bold leading-tight tracking-tight text-gray-900 md:text-2xl dark:text-white">
                                         Edit Product named {{$product->name}}
                                     </h1>
-                                    <form class="space-y-4 md:space-y-6">
+                                    <form class="space-y-4 md:space-y-6" action="{{route('products.update', $product->id)}}" method="POST">
+                                        <input type="hidden" name="_method" value="PUT">
                                         @csrf
                                         <div>
                                             <label for="name"

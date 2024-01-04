@@ -17,8 +17,9 @@
                                     </h4>
                                     @if (auth()->user()->is_admin)
                                     <a href="{{route('products.create')}}"
-                                        class="bg-black text-white flex justify-center items-center px-4 py-2 rounded-md">Create
-                                        New Product</a>
+                                        class="bg-black text-white flex justify-center items-center px-4 py-2 rounded-md">
+                                        Create New Product
+                                    </a>
                                     @endif
                                 </div>
                             </div>
