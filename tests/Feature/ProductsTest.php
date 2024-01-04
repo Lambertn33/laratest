@@ -88,4 +88,17 @@ class ProductsTest extends TestCase
 
         $response->assertStatus(403);
     }
+
+    public function test_product_created_successfully(): void
+    {
+        $newProduct = [
+            'name' => 'New Product',
+            'price' => 'Product price',
+            'description' => 'product description'
+        ];
+        $response  = $this->actingAs($this->admin)->post('/products', $newProduct);
+        $response->assertStatus(302);
+
+        $this->assertDatabaseHas('products', $newProduct);
+    }
 }

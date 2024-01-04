@@ -13,9 +13,12 @@
                         <div class="py-8 px-4 mx-auto max-w-screen-xl sm:py-16 lg:px-6">
                             <div class="max-w-screen-md mb-8 lg:mb-16">
                                 <div class="flex gap-4 items-center">
-                                    <h4 class="mb-4 text-4xl tracking-tight font-extrabold text-gray-900">Products List</h4>
+                                    <h4 class="mb-4 text-4xl tracking-tight font-extrabold text-gray-900">Products List
+                                    </h4>
                                     @if (auth()->user()->is_admin)
-                                    <a href="{{route('products.create')}}" class="bg-black text-white flex justify-center items-center px-4 py-2 rounded-md">Create New Product</a>
+                                    <a href="{{route('products.create')}}"
+                                        class="bg-black text-white flex justify-center items-center px-4 py-2 rounded-md">Create
+                                        New Product</a>
                                     @endif
                                 </div>
                             </div>
@@ -35,6 +38,12 @@
                                     <h3 class="mb-2 text-xl font-bold">{{$product->price_gbp}}GBP</h3>
                                     <h3 class="mb-2 text-xl font-bold">{{$product->price}}USD</h3>
                                     <p class="text-gray-500">{{$product->description}}</p>
+                                    @if (auth()->user()->is_admin)
+                                    <div>
+                                        <a href="{{route('products.edit', $product->id)}}"
+                                            class="bg-black text-white flex w-full py-2 px-4 rounded-lg items-center justify-center">Edit</a>
+                                    </div>
+                                    @endif
                                 </div>
                                 @empty
                                 <p>No Products available</p>
